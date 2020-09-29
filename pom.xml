@@ -12,6 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <jaxb2-maven-plugin.version>2.5.0</jaxb2-maven-plugin.version>
     </properties>
 
     <build>
@@ -19,14 +20,17 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>2.5.0</version>
+                <version>${jaxb2-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>xjc</id>
+                        <id>xjc-generate-id</id>
                         <goals>
                             <goal>xjc</goal>
                         </goals>
                         <configuration>
+                            <!--                            <xjbSources>-->
+                            <!--                                <xjbSource>src/main/resources/xsd/binding.xjb</xjbSource>-->
+                            <!--                            </xjbSources>-->
                             <outputDirectory>target/generated-sources/jaxb</outputDirectory>
                             <packageName>uk.gorodny.generated.user</packageName>
                             <sources>
@@ -34,6 +38,7 @@
                                     ${project.basedir}/src/main/resources/xsd/user/user.xsd
                                 </source>
                             </sources>
+                            <clearOutputDir>false</clearOutputDir>
                         </configuration>
                     </execution>
                 </executions>
